@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salento</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/estilos.css">
+
+    
+
+</head>
+
+
+<body class="fondo">
+
+    <header>
+        <section class="container-header">
+            <nav class="header-info">
+                <div>
+                    <a href="/"><img class="logo-header" src="./assets/img/logos_SALENTO_AUTO.jpg" alt=""></a>
+                </div>
+                <div>
+                    <div>
+                        <p class="titleNav">Alcadía Municipal de Salento <br> <span class="titleNavDep">Departamento del
+                                Quindio</span></p>
+                    </div>
+                </div>
+            </nav>
+        </section>
+    </header>
+
+    <main class="container">
+        <section class="box-inicio">
+            <h1 class=" bienvenidos">
+                ¡Bienvenidos! <br>
+                <span>a pagos en linea</span>
+            </h1>
+            <p class="txt-intro">
+                <strong>Realiza el pago del impuesto de industria y comercio por Internet,</strong> de manera ágil y
+                segura, a través
+                de los bancos que pertenezcan a ACH Colombia.
+            </p>
+            <!-- <p class="txt-intro">
+                Acá puede realizar <strong>el pago del impuesto de industria y comercio por Internet,</strong> a través
+                de los bancos que pertenezcan a ACH Colombia. Este servicio ofrece seguridad en sus transacciones.
+            </p> -->
+        </section>
+
+        <section class="box-btn-industria ">
+            <div class="btn-industria-pay">
+
+                <button id="btn_mostrar" class="btn-industria">
+                    <div>
+                        <svg class="ico-industria" id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 96.66 92.12">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: none;
+                                        stroke: #fff;
+                                        stroke-linecap: round;
+                                        stroke-linejoin: round;
+                                        stroke-width: 2.19px;
+                                    }
+
+                                    .cls-2 {
+                                        fill: #00b4ec;
+                                    }
+                                </style>
+                            </defs>
+                            <polygon class="cls-1"
+                                points="29.02 91.03 95.57 91.03 95.57 38.11 25.48 38.11 29.02 91.03" />
+                            <polygon class="cls-1" points="25.48 38.11 51.37 20.47 51.37 38.11 25.48 38.11" />
+                            <line class="cls-1" x1="51.37" y1="20.47" x2="51.37" y2="48.07" />
+                            <polygon class="cls-1" points="51.37 38.11 73.47 20.47 73.47 38.11 51.37 38.11" />
+                            <polygon class="cls-1" points="73.47 38.11 95.57 20.47 95.57 38.11 73.47 38.11" />
+                            <rect class="cls-2" x="35.46" y="63.07" width="11.47" height="11.47" rx="2.07" />
+                            <rect class="cls-2" x="55.63" y="63.07" width="11.47" height="11.47" rx="2.07" />
+                            <rect class="cls-2" x="75.8" y="63.07" width="11.47" height="11.47" rx="2.07" />
+                            <line class="cls-1" x1="73.47" y1="20.47" x2="73.47" y2="48.07" />
+                            <line class="cls-1" x1="9.6" y1="49.91" x2="20.65" y2="49.91" />
+                            <line class="cls-1" x1="9.6" y1="57.6" x2="20.65" y2="57.6" />
+                            <line class="cls-1" x1="9.6" y1="65.29" x2="20.65" y2="65.29" />
+                            <line class="cls-1" x1="9.6" y1="72.99" x2="20.65" y2="72.99" />
+                            <line class="cls-1" x1="9.6" y1="80.68" x2="20.65" y2="80.68" />
+                            <polygon class="cls-1" points="1.09 91.03 7.11 1.16 22.81 1.09 29.16 91.03 1.09 91.03" />
+                        </svg>
+                        <!-- <img class="ico-industria" src="./assets/img/ico_industria_02.svg" alt=""> -->
+                    </div>
+                    <div>
+                        <p>INDUSTRIA Y <br>COMERCIO</p>
+                        <h3>PAGA AQUÍ</h3>
+
+                    </div>
+                </button>
+            </div>
+
+
+        </section>
+
+        <section class="box-autoliquidable" style="display: flex; margin: 0 auto; justify-content: center; margin-top: 20px;">
+            <div id="img-autoliquidable">
+                <img src="./assets/img/gipao.jpg" alt="autoliquidable">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="box-Footer">
+        <div class="footer">
+            <div class="footer-elements"">
+                <p>Asesorado, diseñado y desarrollado por:</p>
+                <a href=" http://www.1cero1.com/" target="_blank"> <img class="logo101"
+                    src="assets/img/logo_101_software.svg" alt="Logo"></a>
+
+            </div>
+            <p>© Copyright 2023 101 S.A.S.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('btn_mostrar').addEventListener('click', mostrarImagen);
+
+        function mostrarImagen() {
+            // Mostrar la imagen
+            document.getElementById('img-autoliquidable').style.display = 'flex';
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Montserrat';
+    color: #606060;
+    overflow-x: hidden;
+
+    text-decoration: none;
+}
+
+/* header{
+    background: #183a6733;
+    padding: 1.5rem 0;
+} */
+
+
+.fondo {
+    margin: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    max-width: 100%;
+    
+
+    background-image: url(../assets/img/img_auto_salento.jpg);
+}
+
+.container-header {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    align-items: center;
+}
+
+.header-info {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 20px;
+}
+    
+
+.header-info img{
+    width: 100px;
+}
+
+.titleNav{
+    color: #1D1D1B;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.titleNavDep{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.box-inicio{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.box-inicio .bienvenidos{
+    text-align: center;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.bienvenidos span{
+    font-weight: 500;
+    color: #004884;
+}
+
+.box-inicio .bienvenidos{
+    text-align: center;
+    font-weight: 700;
+    color: #004884;
+}
+
+.txt-intro{
+    text-align: center;
+    max-width: 480px;
+    line-height: 1.5rem;
+    font-size: 16px;
+    color: #1D1D1B;
+    mix-blend-mode: multiply;
+    margin: 0px 20px 20px 20px;
+    
+}
+
+.box-btn-industria {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    margin: 0 auto;
+    
+}
+
+
+
+.btn-industria-pay {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-industria {
+    display: flex;
+    background-color: #004884;
+    width: 100%;
+    height: 110px;
+    border: none;
+    border-radius: 5px;
+    margin: 30px 20px 30px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.box-autoliquidable{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#img-autoliquidable{
+    display: none;
+    
+}
+    
+
+.btn-industria p{
+    color: white;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.btn-industria h3{
+    color: white;
+    text-align: left;
+    margin: 0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.ico-industria{
+    width: 80px;
+}
+
+.btn-industria:hover .cls-2{
+    fill: #004884;
+}
+
+.btn-industria:hover{
+    background-color: #00B4EC;
+}
+
+.btn-industria{
+    transition: all 0.5s ease;
+}
+
+.box-Footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1c1c1da2;
+}
+
+
+.footer{
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.footer-elements{
+    display: flex;align-items: center;
+    gap: 10px;
+    margin: 0px 20px;
+}
+
+.footer-elements p{
+    margin: 0px;
+}
+
+.footer p{
+    font-size: 10px;
+    color: #fff;
+    margin: 0;
+}
+
+.footer img{
+    width: 120px;
+    
+}
+
+/*=================RESPONSIVE==================*/
+
+@media only screen and (max-width : 480px){
+
+    .fondo {
+        background-image: url(../assets/img/img_auto_salento_movil.jpg);
+        
+    }
+
+}
+    
+    
+
+
+@media only screen and (max-height: 568px){
+
+    .fondo {
+        background-image: url(../assets/img/img_auto_salento_movil_02.jpg);
+        
+    }
+
+    .box-Footer{
+        position: relative;
+        bottom: auto;
+    }
+}
+
+
+
+

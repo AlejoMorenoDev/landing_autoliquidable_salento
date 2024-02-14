@@ -1,0 +1,1178 @@
+
+<html>
+
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://autoliquidables.1cero1.com//cdn/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://autoliquidables.1cero1.com//cdn/css/paper-bootstrap-wizardv2.css" rel="stylesheet" />
+	<link href="https://autoliquidables.1cero1.com//cdn/css/overlay.css" rel="stylesheet" />
+	<link href="https://autoliquidables.1cero1.com//cdn/css/select2.min.css" rel="stylesheet" />
+	<link href="https://autoliquidables.1cero1.com//cdn/css/iziToast.css" rel="stylesheet" />
+    <!--Fonts and Icons Online-->
+    <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,300" rel="stylesheet" type="text/css" />
+    <link href="/Ciudadanos/Autoliquidable/cc/Generico.css" rel="stylesheet">
+    <title>ICA</title>
+</head>
+
+<body>
+<div>
+     <div class="container" data-ng-app="icaApp">
+        <div class="row" ng-controller="icaController" id="container">
+            <div id="overlay" style="display:none;">
+                <div class="spinner"></div>
+            </div>
+            <div class="col-sm-12">
+                <div class="wizard-container">
+                    <div class="card wizard-card" data-color="red" id="wizardProfile">
+                        <!--Header-->
+                        <div class="wizard-header text-center">
+                            <h3 class="wizard-title">SECRETARÍA DE HACIENDA</h3>
+                            <p class="category" style="align-content:center">
+                                FORMULARIO ÚNICO NACIONAL DE DECLARACIÓN Y PAGO<br />
+                                DEL IMPUESTO DE INDUSTRIA Y COMERCIO
+                            </p>
+                        </div>
+                        <!--Iconos-->
+                        <div class="wizard-navigation" id="ico">
+                            <div class="progress-with-circle">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3" style="width: 21%;"></div>
+                            </div>
+                            <ul>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Inicio" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-home"></i>
+                                        </div>
+                                        Inicio<br>&nbsp;
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Contribuyente" data-toggle="tab" max-width: 100px;>
+                                        <div class="icon-circle">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                        Datos <p style="font-size: 12px;">Contribuyente</p>
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Base" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-view-list"></i>
+                                        </div>
+                                        Base Gravable
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Actividades" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-view-list"></i>
+                                        </div>
+                                        Actividades Gravadas
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Liquidacion" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-view-list"></i>
+                                        </div>
+                                        Liquidación Privada
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Totales" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-money"></i>
+                                        </div>
+                                        Totales<br>&nbsp;
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Firmas" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-pencil"></i>
+                                        </div>
+                                        Firmas<br>&nbsp;
+                                    </a>
+                                </li>
+                                <li style="top:50px">
+                                    <a href="#/ica/#Final" data-toggle="tab">
+                                        <div class="icon-circle">
+                                            <i class="ti-cloud-down"></i>
+                                        </div>
+                                        Pago y Descarga
+                                    </a>
+                                </li>
+                            </ul>
+                            <br /><br />
+                        </div>
+                        <!--Small Icons-->
+                        <div class="wizard-navigation" id="icoSmall">
+                            <div class="progress-with-circle">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3" style="width: 21%;"></div>
+                            </div>
+                            <ul class="nav nav-pills">
+                                <li style="width:12.5%;top:25px">
+                                    <a href="#/ica/#Inicio" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-home" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">
+                                    <a href="#/ica/#Contribuyente" data-toggle="tab" max-width: 100px;>
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-user" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">                                    <a href="#/ica/#Base" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-view-list" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">                                    <a href="#/ica/#Actividades" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-view-list" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">
+                                    <a href="#/ica/#Liquidacion" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-view-list" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">
+                                    <a href="#/ica/#Totales" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-money" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">
+                                    <a href="#/ica/#Firmas" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-pencil" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li style="width:12.5%;top:25px">
+                                    <a href="#/ica/#Final" data-toggle="tab">
+                                        <div class="icon-circle" style="width: 40px;height: 40px;margin-top: 15px;">
+                                            <i class="ti-cloud-down" style="top: 5px;"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Contenido-->
+                        <div class="tab-content row">
+                            <!--Inicio-->
+                            <div class="tab-pane" id="Inicio">
+                                <div class="row">
+                                    <div class="col-sm-5 col-md-offset-1">
+                                        <div class="form-group">
+                                            <label>País</label>
+                                            <select id="ddlPais" class="form-control" disabled="true"><option>Colombia</option></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Departamento</label>
+                                            <select id="ddlDepartamento" class="form-control req" ng-model="DepSelected" ng-options="DepSelected.NombreDepartamento for DepSelected in Departamentos track by DepSelected.Id" disabled="true">
+                                                <option value="">Selecciona una opción...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Municipio</label>
+                                            <select id="ddlMunicipio" class="form-control req" disabled="true">
+                                                <option value="0">Selecciona una opción...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Año Gravable</label>
+                                            <select id="ddlAnio" class="form-control req" ng-model="AnioGravable" ></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label>Opciones de Uso</label>
+                                            <br /><br />
+                                            <div class="choice active" data-toggle="wizard-checkbox">
+                                                <input ng-model="Id_TipoUso" type="radio" class="col-sm-offset-1" name="uso" value="1" ng-checked="(Id_TipoUso == '1')" checked />
+                                                <div class="card card-checkboxes card-hover-effect uso">
+                                                    <p>Declaración Inicial</p>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="choice" data-toggle="wizard-checkbox">
+                                                <input ng-model="Id_TipoUso" type="radio" class="col-sm-offset-1" name="uso" value="2" ng-checked="(Id_TipoUso == '2')"/>
+                                                <div class="card card-checkboxes card-hover-effect uso">
+                                                    <p>Corrección</p>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="choice" data-toggle="wizard-checkbox">
+                                                <input ng-model="Id_TipoUso" type="radio" class="col-sm-offset-1" name="uso" value="3" ng-checked="(Id_TipoUso == '3')"/>
+                                                <div class="card card-checkboxes card-hover-effect uso">
+                                                    <p>Solo Pago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10 col-md-offset-1 row" id="corregir" hidden>
+                                        <div class="form-group col-sm-4">
+                                            <label>Número Declaración que Corrige</label>
+                                            <input type="text" ng-model="DetalleDeclaracion.NumeroDeclaracionCorrige" class="form-control" id="txtRadicadoAnterior" placeholder="Radicado Anterior" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Valor Declaración que Corrige</label>
+                                            <input type="text" ng-model="DetalleDeclaracion.ValorDeclaracionCorrige" class="form-control" id="txtValorAnterior" placeholder="Valor Radicado Anterior" />
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>Fecha de Presentación</label>
+                                            <input type="text" ng-model="DetalleDeclaracion.FechaPresentacionDeclaracionAnterior" class="form-control" id="txtFechaPresentacion" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10 col-md-offset-1 row" id="bogota">
+                                        <div class="form-group col-sm-12 text-center">
+                                            <label>Marque el Bimestre o el periodo anual (<strong>SOLAMENTE PARA BOGOTÁ</strong>):</label>
+                                        </div>
+                                        <div class="choice col-sm-2 active" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" id="PeriodoBogotaEneFeb" class="col-sm-offset-1" name="periodoBog" value="Ene-Febre"  />
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                                <p>Ene-Feb</p>
+                                            </div>
+                                        </div>
+                                        <div class="choice col-sm-2" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" class="col-sm-offset-1" name="periodoBog" id="PeriodoBogotaMarAbr" value="Mar-Abr" />
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                                <p>Mar-Abr</p>
+                                            </div>
+                                        </div>
+                                        <div class="choice col-sm-2" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" class="col-sm-offset-1" name="periodoBog" id="PeriodoBogotaMayJun" value="May-Jun" />
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                                <p>May-Jun</p>
+                                            </div>
+                                        </div>
+                                        <div class="choice col-sm-2" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" class="col-sm-offset-1" name="periodoBog" id="PeriodoBogotaJulAgos" value="Jul-Agos" />
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                                <p>Jul-Ago</p>
+                                            </div>
+                                        </div>
+                                        <div class="choice col-sm-2" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" class="col-sm-offset-1" name="periodoBog" id="PeriodoBogotaSepOct" value="Sep-Oct" />
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                                <p>Sep-Oct</p>
+                                            </div>
+                                        </div>
+                                        <div class="choice col-sm-2" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" class="col-sm-offset-1" name="periodoBog" id="PeriodoBogotaNovDic" value="Nov-Dic" />
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                                <p>Nov-Dic</p>
+                                            </div>
+                                        </div>
+                                        <label for="">&nbsp;</label><br>
+                                        <div class="choice col-sm-2 col-sm-offset-5" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="periodoBog" id="PeriodoAnual" value="1"/>
+                                            <div class="card card-checkboxes card-hover-effect periodo">
+                                              <p>Anual</p>
+                                            </div>
+                                        </div>      
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Identificación-->
+                            <div class="tab-pane" id="Contribuyente">
+                                <div class="col-md-10 col-md-offset-1 row">
+                                    Si NO es persona natural NI persona juridica marque:<br />
+                                    <div class="control">
+                                        <input type="radio" name="rbPAConsorcio" value="Consorcio" ng-model="DetalleDeclaracion.ConPA" ng-checked="(DetalleDeclaracion.ConPA == 'Consorcio')">
+                                        Es Consorcio o Unión temporal&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" name="rbPAConsorcio" value="PA" ng-model="DetalleDeclaracion.ConPA" ng-checked="(DetalleDeclaracion.ConPA == 'PA')">
+                                        Realiza Actividades a Través de Patrimonio Autónomo
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>1. Identificación</label>
+                                            <div class="control">
+                                                <input type="radio" name="rbTipoDocumento" value="2" ng-model="Persona.Contribuyente.Id_TipoDocumento" ng-checked="(Persona.Contribuyente.Id_TipoDocumento == '2')" />
+                                                Nit
+                                                <input type="radio" name="rbTipoDocumento" value="1" ng-model="Persona.Contribuyente.Id_TipoDocumento" ng-checked="(Persona.Contribuyente.Id_TipoDocumento == '1')" />
+                                                CC
+                                                <input type="radio" name="rbTipoDocumento" value="4" ng-model="Persona.Contribuyente.Id_TipoDocumento" ng-checked="(Persona.Contribuyente.Id_TipoDocumento == '4')" />
+                                                TI
+                                                <input type="radio" name="rbTipoDocumento" value="3" ng-model="Persona.Contribuyente.Id_TipoDocumento" ng-checked="(Persona.Contribuyente.Id_TipoDocumento == '3')" />
+                                                CE
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group col-md-8">
+                                            <br />
+                                            <input id="txtDocumento" ng-model="Persona.Contribuyente.Documento" class="form-control num req" placeholder="Ingrese Documento" name="documento" MaxLength="10" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <br />
+                                            <input id="txtDV" ng-model="Persona.Contribuyente.DetalleContribuyente.DV" class="form-control num" placeholder="DV" MaxLength="1" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" id="dvJuridica" hidden>
+                                            <label>2. Razón Social</label>
+                                            <input type="text" ng-model="Persona.Contribuyente.DetalleContribuyente.RazonSocial" id="txtRazon" class="form-control letterWith" name="razon" MaxLength="200" />
+                                        </div>
+                                        <div class="form-group" id="dvNatural">
+                                            <div class="col-md-12" style="padding:0"><label>2. Nombres</label></div>
+                                            <div class="col-md-3">
+                                                <input type="text" ng-model="Persona.Contribuyente.DetalleContribuyente.PrimerNombre" id="txtPrimerNombre" placeholder="Primer Nombre" class="form-control letter req" name="primerNombre" MaxLength="30" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" ng-model="Persona.Contribuyente.DetalleContribuyente.SegundoNombre" id="txtSegundoNombre" placeholder="Segundo Nombre" class="form-control letter" name="segundoNombre" MaxLength="50" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" ng-model="Persona.Contribuyente.DetalleContribuyente.PrimerApellido" id="txtPrimerApellido" placeholder="Primer Apellido" class="form-control letter req" name="primerApellido" MaxLength="30" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" ng-model="Persona.Contribuyente.DetalleContribuyente.SegundoApellido" id="txtSegundoApellido" placeholder="Segundo Apellido" class="form-control letter" name="segundoApellido" MaxLength="50" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 row">
+                                    <div class="col-md-12" style="text-align:center"><strong>Dirección de Notificación o del establecimiento</strong></div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>3. Dirección</label>
+                                            <input type="text" ng-model="Persona.Direccion.Direccion" id="txtDireccion" class="form-control req" MaxLength="200" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Departamento</label>
+                                            <select id="ddlDepartamentoDir" ng-model="Persona.Direccion.Id_Departamento" class="form-control req">
+                                                <option value="">Selecciona una opción...</option>
+                                                <option ng-repeat="d in Departamentos" value="{{d.Id}}">
+                                                    {{d.NombreDepartamento}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Municipio</label>
+                                            <select id="ddlMunicipioDir" ng-model="Persona.Direccion.Id_Ciudad" class="form-control req">
+                                                <option value="">Selecciona una opción...</option>
+                                                <option ng-repeat="c in CiudadesDir" value="{{c.Id}}">
+                                                    {{c.NombreCiudad}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>4. Teléfono</label>
+                                            <input type="text" ng-model="Persona.Telefono.Telefono" id="txtTelefono" class="form-control req num" MaxLength="10" title="03+(indicativo)+(número) ó celular" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>5. Correo Electrónico</label>
+                                            <input type="email" ng-model="Persona.Email.Mail" id="txtCorreo" class="form-control req" name="email" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>6. Número de Establecimientos</label>
+                                            <input type="text" ng-model="DetalleDeclaracion.NumeroEstablecimientos" id="txtNroEstablecimientos" class="form-control num" MaxLength="2" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>7. Clasificación Contribuyente</label>
+                                            <select id="ddlClasificacion" ng-model="DetalleDeclaracion.ClasificacionContribuyente" class="form-control req">
+                                                <option value=""></option>
+                                                <option value="Comun">Común</option>
+                                                <option value="Simplificado" selected>Simplificado</option>
+                                                <option value="Gran Contribuyente">Gran Contribuyente</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Base-->
+                            <div class="tab-pane" id="Base">
+                                <div class="col-sm-10 col-md-offset-1 row ">
+                                    <div class="form-group">
+                                        <div class="col-md-8">
+                                            <label>8. Total Ingresos Ordinarios y Extraordinarios del Periodo en Todo el País:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtIngresosOrdinarios" class="form-control num req" custom-on-change="CalcularRenglon10" data-ng-model="DetalleDeclaracion.IngresosOrdinarios" data-blur-currency />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>9. Menos: Ingresos Fuera de Este Municipio o Distrito:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtIngresosFueraMunicipio" class="form-control num" custom-on-change="CalcularRenglon10" data-ng-model="DetalleDeclaracion.IngresosFueraMunicipio" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>10. Total Ingresos Ordinarios y Extraordinarios en Este Municipio (Renglón 8 menos el 9):</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtTotalIngresosOrdinarios" class="form-control num req" data-ng-model="DetalleDeclaracion.TotalIngresosOrdinarios" readonly="readonly" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>11. Menos: Ingresos Por Devolución, Rebajas, Descuentos:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtDevolucionDescuentos" class="form-control num" custom-on-change="CalcularRenglon16" data-ng-model="DetalleDeclaracion.DevolucionDescuentos" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>12. Menos: Ingresos Por Exportaciones:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtExportaciones" class="form-control num" custom-on-change="CalcularRenglon16" data-ng-model="DetalleDeclaracion.Exportaciones" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>13. Menos: Ingresos Por Venta de Activos Fijos:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtActivosFijos" class="form-control num" custom-on-change="CalcularRenglon16" data-ng-model="DetalleDeclaracion.ActivosFijos" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>14. Menos: Ingresos Por Actividades Excluidas o No Sujetas y Otros Ingresos No Gravados:</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtActividadesExcluidas" class="form-control num" custom-on-change="CalcularRenglon16" data-ng-model="DetalleDeclaracion.ActividadesExcluidas" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label>15. Menos: Ingresos Por Otras Actividades Exentas en Este Municipio o Distrito (Por Acuerdo):</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtActividadesExentas" class="form-control num" custom-on-change="CalcularRenglon16" data-ng-model="DetalleDeclaracion.ActividadesExentas" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label><strong>16. TOTAL INGRESOS GRAVABLES<br />(Renglón 10 Menos 11, 12, 13, 14 y 15):</strong></label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="txtIngresosGravables" class="form-control req num" data-ng-model="DetalleDeclaracion.IngresosGravables" readonly="readonly" data-blur-currency/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Actividades-->
+                            <div class="tab-pane" id="Actividades">
+                                <div class="col-sm-12 row ">
+                                    <div class="col-sm-11 col-sm-offset-1 row">
+                                        <div class="col-sm-12 row">
+                                            <div class="col-md-8">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label><strong>ACTIVIDAD</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <select class="form-control ddlact" style="width:100%" id="ddlAct-1">
+                                                        <option value="0">Selecciona una opción...</option>
+                                                    </select>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label><strong>CÓDIGO</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="txtCodAct-1" class="form-control" readonly="readonly" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 row">
+                                            <div class="col-sm-4">
+                                                <div class="col-md-4">
+                                                    <div class="form-group"> 
+                                                        <label><strong>INGRESOS GRAVADOS</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" id="txtIngresoAct-1" class="form-control act num" custom-on-change="Redondear" data-ng-model="Actividades.IngresoAct1" data-blur-currency/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>TARIFA X MIL</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <input type="text" id="txtTarifaAct-1" class="form-control" readonly="readonly" />
+                                                        <span class="input-group-addon">X1000</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>IMPUESTO</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" id="txtImpuestoAct-1" class="form-control red" readonly="readonly" data-ng-model="Actividades.ImpuestoAct1" data-blur-currency/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 row">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="ActividadesAdicionales">
+                                                    <h5 class="panel-title">
+                                                        <a class="drop" data-toggle="collapse" href="javascript:;" data-target="#dvActividadesAdicionales" aria-expanded="true" aria-controls="dvActividadesAdicionales">
+                                                            <i class="ti-arrow-circle-down"></i>
+                                                            Otras Actividades
+                                                        </a>
+                                                    </h5>
+                                                </div>
+                                                <div id="dvActividadesAdicionales" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ActividadesAdicionales">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                        </div>
+                                                        <div class="col-sm-4 text-right">
+                                                            <a class="btn btn-default addActividad"><i class="ti-plus"></i> Agregar Actividad</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 row">
+                                            <div class="col-sm-4">
+                                                <div class="col-md-12" style="display: none;">
+                                                    <div class="form-group">
+                                                        <label><strong>El Total de Ingresos debe ser igual a: $ {{DetalleDeclaracion.IngresosGravables}}</strong></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>Total Ingresos:</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" ID="txtTotalIngreso" class="form-control num req" readonly="readonly" data-ng-model="DetalleDeclaracion.TotalIngreso" data-blur-currency/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label><strong>17. Total Impuesto:</strong></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" id="txtTotalImpuesto" class="form-control num req" readonly="readonly" custom-on-change="CalcularRenglon20" data-ng-model="DetalleDeclaracion.TotalImpuesto" data-blur-currency/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 row">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-6">
+                                                <div class="col-md-7">
+                                                    <div class="form-group">
+                                                        <label>18. Generación de Energía / Capacidad Instalada:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="input-group">
+                                                        <input type="text" id="txtEnergia" readonly="readonly" class="form-control num" data-ng-model="DetalleDeclaracion.Energia"/>
+                                                        <span class="input-group-addon">KW</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>19.Impuesto Ley 56 1981:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span>
+                                                        <input type="text" id="txtImpuestoLey" readonly="readonly" class="form-control num" custom-on-change="CalcularRenglon20" data-ng-model="DetalleDeclaracion.ImpuestoLey" data-blur-currency/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Liquidacion-->
+                            <div class="tab-pane" id="Liquidacion">
+                                <div class="col-sm-10 col-md-offset-1 row ">
+                                    <div id="liq" role="tablist" aria-multiselectable="true">
+                                        <!--Impuesto Cargo-->
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="ImpuestoCargo">
+                                                <h5 class="panel-title">
+                                                    <a class="drop" data-toggle="collapse" data-parent="#liq" href="javascript:;" data-target="#dvImpuestoCargo" aria-expanded="true" aria-controls="dvImpuestoCargo">
+                                                        <i class="ti-arrow-circle-up"></i>
+                                                        Impuesto a Cargo
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="dvImpuestoCargo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="ImpuestoCargo">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>20. Total Impuesto de Industria y Comercio (Renglón 17 + 19):</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtImpIndYComercio" class="form-control num req" readonly="readonly" data-ng-model="DetalleDeclaracion.ImpIndYComercio" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>21. Impuesto de avisos y tableros (15% Renglón 20): Tiene Avisos?</label>
+                                                            <input type="radio" name="rbAvisos" value="Si" ng-model="TieneAvisos" ng-checked="(TieneAvisos == 'Si')" checked/>Si
+                                                            <input type="radio" name="rbAvisos" value="No" ng-model="TieneAvisos" ng-checked="(TieneAvisos == 'No')" />No
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtImpAvisosyTableros" class="form-control num" readonly="readonly" custom-on-change="CalcularRenglon25" data-ng-model="DetalleDeclaracion.ImpAvisosyTableros" data-blur-currency required />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>22. Pago Por Unidades Comerciales Adicionales del Sector Financiero:	</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <!-- type="text" id="txtSobretasaSeguridad" class="form-control num" custom-on-change="CalcularRenglon25" data-ng-model="DetalleDeclaracion.SobretasaSeguridad"  data-blur-currency -->
+                                                                <input type="text" id="txtUnidadesComerciales" class="form-control num" custom-on-change="CalcularRenglon25" data-ng-model="DetalleDeclaracion.UnidadesComerciales" display="none" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>23. Sobretasa Bomberil (Ley 1575 de 2012) (Si la hay, Liquídela Según el Acuerdo Municipal o Distrital):	</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtSobretasa" class="form-control num" custom-on-change="CalcularRenglon25" data-ng-model="DetalleDeclaracion.Sobretasa" data-blur-currency readonly/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Se oculta el input de Sobretasa de Seguridad ya que el municipio no lo usa -->
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>24. Sobre Tasa de Seguridad (ley 1421 de 2011) (Si la hay, liquidación según el acuerdo municipal o distrital):</label>
+                                                        </div>
+                                                        <div class="col-md-4" >
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtSobretasaSeguridad" class="form-control num" custom-on-change="CalcularRenglon25" data-ng-model="DetalleDeclaracion.SobretasaSeguridad" display="none" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!---------------------------------------------------------------------------- -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label>25. Total Impuesto a Cargo (Renglón 20 + 21 + 22 + 23 + 24):</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" id="txtTotalImpuestosCargo" class="form-control num req" readonly="readonly" data-ng-model="DetalleDeclaracion.TotalImpuestoCargo" data-blur-currency/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Deducciones-->
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="Deduccion">
+                                                <h5 class="panel-title">
+                                                    <a class="drop collapsed" data-toggle="collapse" data-parent="#liq" href="javascript:;" data-target="#dvDeduccion" aria-expanded="false" aria-controls="dvDeduccion">
+                                                        <i class="ti-arrow-circle-down"></i>
+                                                        Deducciones, Sanciones y Anticipos
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="dvDeduccion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Deduccion">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>26. Menos: Valor de Exención o Exoneración Sobre el Impuesto y No Sobre los Ingresos:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtValorExencion" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.ValorExencion" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>27. Menos: Retenciones que le practicaron a favor de este municipio o distrito en este periodo:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtRetenciones" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.Retenciones" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>28. Menos: Autorretenciones practicadas a favor de este municipio o distrito en este periodo:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtAutorretenciones" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.Autorretenciones" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>29. Menos: Anticipo Liquidado en el Año Anterior:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtAnticipoLiquidado" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.AnticipoLiquidado" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8"> 
+                                                            <label>30. Anticipo del Año Siguiente (Si Existe, Liquide Porcentaje Según Acuerdo Municipal o Distrital):</label><br>
+															<input type="radio" name="rbAnticipo" value="Si" ng-model="TieneAnticipo" ng-checked="(TieneAnticipo == 'Si')" checked/>Si
+                                                            <input type="radio" name="rbAnticipo" value="No" ng-model="TieneAnticipo" ng-checked="(TieneAnticipo == 'No')" />No
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtAnticipoImpuesto" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.AnticipoImpuesto" data-blur-currency readonly/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label class="col-md-4" id="lblSanciones">31. Más: Sanciones:</label>
+                                                            <div class="col-md-8" id="TipoSanciones">
+                                                                <input type="radio" name="rbTipoSancion" value="Ext" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Ext')" /> Extemporaneidad
+                                                                <input type="radio" name="rbTipoSancion" value="Cor" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Cor')" /> Correción
+                                                                <input type="radio" name="rbTipoSancion" value="Ine" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Ine')" /> Inexactitud
+                                                                <input type="radio" name="rbTipoSancion" value="Otr" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Otr')" /> Otra
+                                                                <input type="text" id="txtOtraSancion" class="form-control" data-ng-model="DetalleDeclaracion.OtraSancion" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtSanciones" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.Sanciones" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>32. Menos Saldo a Favor del Periodo Anterior Sin Solicitud de Devolución o Compensación:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtSaldoPeriodo" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.SaldoPeriodo" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label>33. Total Saldo a Cargo (Renglón 25 - 26 - 27 - 28 - 29 + 30 + 31 - 32):</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" id="txtTotalSaldoCargo" class="form-control req num ng-scope ng-valid ng-dirty" readonly="readonly" data-ng-model="DetalleDeclaracion.TotalSaldoCargo" data-blur-currency="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label>34. Total Saldo a Favor (Renglón 25 - 26 - 27 - 28 - 29 + 30 + 31 - 32) si el resultado es menor a cero:</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" id="txtTotalSaldoFavor" class="form-control req num" readonly="readonly" data-ng-model="DetalleDeclaracion.TotalSaldoFavor" data-blur-currency="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Totales-->
+                            <div class="tab-pane" id="Totales">
+                                <div class="col-sm-10 col-md-offset-1 row ">
+                                    <div id="tot" role="tablist" aria-multiselectable="true">
+                                        <!--Total a Pagar-->
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="Total">
+                                                <h5 class="panel-title">
+                                                    <a class="drop" data-toggle="collapse" data-parent="#tot" href="javascript:;" data-target="#dvTotal" aria-expanded="true" aria-controls="dvTotal">
+                                                        <i class="ti-arrow-circle-up"></i>
+                                                        Total a Pagar
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="dvTotal" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="Total">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>35. Valor a Pagar:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtValorPagar" class="form-control num" readonly="readonly" custom-on-change="CalcularRenglon38" data-ng-model="DetalleDeclaracion.ValorPagar" data-blur-currency/>
+                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>36. Descuento Por Pronto Pago (Si Existe, Liquidelo Según el Acuerdo Municipal o Distrital):</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtDescuento" class="form-control num" custom-on-change="CalcularRenglon38" data-ng-model="DetalleDeclaracion.Descuento" data-blur-currency>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>37. Intereses de Mora:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">   
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtInteresMora" class="form-control num" custom-on-change="CalcularRenglon33" data-ng-model="DetalleDeclaracion.InteresMora" data-blur-currency/>
+                                                         </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label>38. Total a Pagar (Renglón 35 - 36 + 37):</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" id="txtTotalAPagar" class="form-control num" readonly="readonly" data-ng-model="DetalleDeclaracion.TotalAPagar" data-blur-currency/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Pago Voluntario-->
+                                        <div class="panel panel-default" >
+                                            <div class="panel-heading" role="tab" id="Voluntario">
+                                                <h5 class="panel-title">
+                                                    <a class="drop collapsed" data-toggle="collapse" data-parent="#tot" href="javascript:;" data-target="#dvVoluntario" aria-expanded="false" aria-controls="dvVoluntario">
+                                                        <i class="ti-arrow-circle-down"></i>
+                                                        SECCIÓN PAGO VOLUNTARIO (Solamente donde exista esta opción)
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="dvVoluntario" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Voluntario">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>39. Liquide el Valor del Pago Voluntario (Según Instrucciones del Municipio/Distrito):</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtPagoVoluntario" class="form-control num" custom-on-change="CalcularRenglon40" data-ng-model="DetalleDeclaracion.PagoVoluntario" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>40. Total a Pagar Con Pago Voluntario (Renglón 38 + 39):</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">$</span>
+                                                                <input type="text" id="txtTotalPagoVoluntario" class="form-control num" readonly="readonly" data-ng-model="DetalleDeclaracion.TotalPagoVoluntario" data-blur-currency/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <label>Destino de Mi Aporte Voluntario:</label>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"></span>
+                                                                <input type="text" id="txtDestino" class="form-control" data-ng-model="DetalleDeclaracion.Destino" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Firmas-->
+                            <div class="tab-pane" id="Firmas">
+                                <div class="col-sm-10 col-md-offset-1 row ">
+                                    <div class="col-md-12">
+                                        <h3><strong>INFORMACIÓN DEL DECLARANTE</strong></h3>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Nombre del Declarante:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" data-ng-model="Declarante.Nombre" id="txtDeclarante" class="form-control req" MaxLength="200" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Número de documento:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" data-ng-model="Declarante.Documento" id="txtDocDeclarante" class="form-control num req" MaxLength="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3><strong>INFORMACIÓN DEL CONTADOR / REVISOR FISCAL</strong></h3>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <br /><label>Cargo:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="choice col-md-6" data-toggle="wizard-checkbox">
+                                                    <input type="radio" class="col-sm-offset-1" name="cargo" value="1" ng-model="Contador.Id_Cargo" ng-checked="(Contador.Id_Cargo == '1')" />
+                                                    <div class="card card-checkboxes card-hover-effect cargo">
+                                                        <p>Contador</p>
+                                                    </div>
+                                                </div>
+                                                <div class="choice col-md-6" data-toggle="wizard-checkbox">
+                                                    <input type="radio" class="col-sm-offset-1" name="cargo" value="2" ng-model="Contador.Id_Cargo" ng-checked="(Contador.Id_Cargo == '2')" />
+                                                    <div class="card card-checkboxes card-hover-effect cargo">
+                                                        <p>Revisor Fiscal</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Nombre del Contador o Revisor Fiscal:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" data-ng-model="Contador.Nombre" id="txtContador" class="form-control" readonly="readonly" MaxLength="200" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Número de documento:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" data-ng-model="Contador.Documento" id="txtDocContador" class="form-control num" readonly="readonly" MaxLength="10" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Número de Tarjeta Profesional:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" data-ng-model="Contador.NroTarjetaProfesional" id="txtTarjetaProfesional" class="form-control" readonly="readonly" MaxLength="100" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Pago y Descarga-->
+                            <div class="tab-pane" id="Final">
+                                <div class="col-sm-10 col-md-offset-1 row ">
+                                    <div class="jumbotron row">
+                                        <h2><strong>IMPORTANTE</strong></h2>
+                                        <h5 style="text-align:justify">
+                                           Señor usuario, si va a realizar el pago en línea de su Impuesto, también deberá descargar y firmar la Declaración y enviarla junto con el comprobante de pago y el soporte de retenciones a los correos electrónicos: <b>tesoreria@salento-quindio.gov.co </b>, <b> rentas@salento-quindio.gov.co</b>, de no realizarse este trámite su declaración se tendrá por no presentada. También puede realizar el pago en cualquier sucursal BANCOLOMBIA
+                                        </h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4" id="guardar" style="text-align: -webkit-center;">
+                                            <a href="#" id="btnSave">
+                                                <img style="width: 40%;" class="img-responsive col-sm-4" src='data:image/png;base64,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'/>
+                                                <div class="caption">
+                                                    <p>Guardar Formulario</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4" id="declarar" style="text-align: -webkit-center;" hidden="true">
+                                            <a href="#" id="btnDownload">
+                                                <img style="width: 40%;" class="img-responsive col-sm-4" src='data:image/png;base64,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'/>
+                                                <div class="caption">
+                                                    <p> Declarar</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-4" id="pago" style="text-align: -webkit-center;" hidden="true">
+                                            <a href="#" id="btnPSE">
+                                                <img style="width: 40%;" class="img-responsive col-sm-4" src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAxFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDM1MiwgMjAyMC8wMS8zMC0xNTo1MDozOCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjI3MURENDk2RUREMTFFQTkwQ0REM0NFMThENDNFOTQiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjI3MURENDg2RUREMTFFQTkwQ0REM0NFMThENDNFOTQiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIwMjAgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJERjc2MTM3QTMzMEJGODgwN0JCQUZFM0Y4NkM2MDI3MiIgc3RSZWY6ZG9jdW1lbnRJRD0iREY3NjEzN0EzMzBCRjg4MDdCQkFGRTNGODZDNjAyNzIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7VPRZWAAC1uklEQVR42ux9B4AdVbn/78zMndu2bza9N5IAAaQj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'/><div class="caption">
+                                                    <p>Pagar en Línea</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wizard-footer row">
+                            <div class="pull-right">
+                                <br />
+                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' name='next' value='Siguiente' />
+                                <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd' name='finish' value='Finalizar' style="visibility:hidden" />
+                            </div>
+                            <div class="pull-left">
+                                <br />
+                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Anterior' />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Preview-->
+    <div class="modal fade" id="modalFormulario" tabindex="-1" role="dialog" aria-labelledby="Mensaje" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Mensaje">PREVISUALIZACIÓN FORMULARIO A DECLARAR</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-20px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align:justify" id="previewPDF">
+
+                </div>
+                <div class="modal-footer">
+                    <button id="btnDeclarar" type="button" class="btn btn-success" data-dismiss="modal">Declarar</button>
+                    <button id="btnCancelar" type="button" class="btn btn-warning" data-dismiss="modal">Corregir</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+    
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/jquery-3.3.1.js"></script>    
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/bootstrap.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/angular.min.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/paper-bootstrap-wizard.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/jquery.bootstrap.wizard.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/jquery.validate.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/select2.min.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/iziToast.js"></script>
+    <script src="https://autoliquidables.1cero1.com/cdn/scripts/pdfobject.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>-->
+    <!-- Load app main script-->
+   <script src="https://autoliquidables.1cero1.com/service/services.js"></script>
+    <script src="https://autoliquidables.1cero1.com/controllers/8900011270-Salento/ICA/icaControllerMobile.js"></script>
+    
+    <!-- <script src="services.js"></script> -->
+    <!-- <script src="icaControllerMobile.js"></script>  -->
+
+    <script>
+        app.constant('icaSettings', {
+            apiServiceBaseUri: serviceBase,
+            NombreArchivo: 'PdfICA',
+            CodigoMunicipio: '8900011270',
+            Password:"G3n3r1c02020*",
+            mobile:true,
+            Id_TipoAutoliquidable: '1'
+        });
+        $(".btn").click(function(){
+            $('html, body').animate({scrollTop:150}, 'slow');
+		    return false;
+        });
+    </script>
+</div>
+
+
+</body>
+
+</html>

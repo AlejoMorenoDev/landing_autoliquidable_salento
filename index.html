@@ -106,13 +106,13 @@
 
         <section class="box-autoliquidable" style="display: flex; margin: 0 auto; justify-content: center; margin-top: 20px;">
             <div id="img-autoliquidable">
-                <img src="./assets/img/gipao.jpg" alt="autoliquidable">
+                <iframe src="ICA/ICA.html" width="1024" height="878" frameborder="0" allowfullscreen></iframe>
             </div>
         </section>
 
     </main>
 
-    <footer class="box-Footer">
+    <footer id="Footer1cero1" class="box-Footer">
         <div class="footer">
             <div class="footer-elements"">
                 <p>Asesorado, diseñado y desarrollado por:</p>
@@ -128,28 +128,17 @@
         document.getElementById('btn_mostrar').addEventListener('click', mostrarImagen);
 
         function mostrarImagen() {
-            // Mostrar la imagen
+            // Mostrar la imagen  y bajar el footer
             document.getElementById('img-autoliquidable').style.display = 'flex';
+            const Footer = document.getElementById("Footer1cero1");
+            Footer.classList.remove('box-Footer');
+            Footer.style.marginTop = '1rem';
+            Footer.style.display = 'block';
+            Footer.style.backgroundColor = '#1c1c1da2';
+            Footer.style.width = '100%';
         }
 
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
 </html>

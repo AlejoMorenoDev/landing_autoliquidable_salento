@@ -129,7 +129,7 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
         , TotalAPagar: ""
         , PagoVoluntario: ""
         , TotalPagoVoluntario: ""
-        , ValorPagadoDeclaracionInicial: ""
+        , ValorPagadoDeclaracionInicial: 0
         , Destino: ""
         , fechaMaxima: new Date("2024/03/27")
         , MensajeAcuerdoMunicipal: ""
@@ -381,6 +381,15 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             });
     }
 
+    $scope.flaseDeclarar = function(){
+        $('#overlay').fadeIn();
+        document.getElementById("pago").hidden = false;
+        document.getElementById("guardar").hidden = true;
+        document.getElementById("declarar").hidden = true;
+        $('#overlay').fadeOut();
+        $('#modalFormulario').modal('hide');
+    }
+
     $scope.Declarar = function () {
         let declaracion = {
             Id: $scope.IdDeclaracion,
@@ -484,7 +493,10 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             function (result) {
                 var url = (result.data.replace('"', '')).replace('"', '');
                 window.open(url, '_blank');
+                setTimeout(function() {
                     location.reload();
+                }, 3000);
+                location.reload();
             }, function (error) {
                 $('#overlay').fadeOut();
                 iziToast.error({
@@ -1156,6 +1168,7 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
         });
         $("#btnDeclarar").click(function () {
             $scope.Declarar();
+            // $scope.flaseDeclarar();
         });
         $("#btnCancelar").click(function () {
             document.getElementById("declarar").hidden = true;

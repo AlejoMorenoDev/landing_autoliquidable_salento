@@ -671,8 +671,9 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             const TasaIntMoraDiario = TasaIntMoraAnual / 366;
             let diferenciaFechas = Now - FechaM;
             diferenciaFechas = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
-            let Valor = icaService.round(ValorPag * TasaIntMoraDiario * diferenciaFechas);
+            let Valor = (ValorPag * TasaIntMoraDiario * diferenciaFechas) / 100;
             Valor = Math.max(Valor, 0);
+            Valor = icaService.round(Valor);
 
             if (event) {
                 reaplicar($(event.target));

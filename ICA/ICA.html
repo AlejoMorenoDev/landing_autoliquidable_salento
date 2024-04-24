@@ -522,8 +522,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label><strong>CÓDIGO</strong></label>
+                                                    <div class="form-group" style="text-align: center;">
+                                                        <label><strong>CÓDIGO CIIU</strong></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-9">
@@ -809,10 +809,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-8"> 
-                                                            <label>30. Anticipo del Año Siguiente (Si Existe, Liquide Porcentaje Según Acuerdo Municipal o Distrital):</label><br>
-															<input type="radio" name="rbAnticipo" value="Si" ng-model="TieneAnticipo" ng-checked="(TieneAnticipo == 'Si')" checked/>Si
-                                                            <input type="radio" name="rbAnticipo" value="No" ng-model="TieneAnticipo" ng-checked="(TieneAnticipo == 'No')" />No
+                                                        <div class="col-md-8" style="display: flex; flex-flow: row wrap;"> 
+                                                            <label class="col-md-9">30. Anticipo del Año Siguiente (Si Existe, Liquide Porcentaje Según Acuerdo Municipal o Distrital):</label><br>
+                                                            <div class="col-md-3">
+                                                                <input type="radio" name="rbAnticipo" value="Si" ng-model="TieneAnticipo" ng-checked="(TieneAnticipo == 'Si')" checked/>Si
+                                                                <input type="radio" name="rbAnticipo" value="No" ng-model="TieneAnticipo" ng-checked="(TieneAnticipo == 'No')" />No
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
@@ -823,8 +825,8 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-8">
-                                                            <label class="col-md-4" id="lblSanciones">31. Más: Sanciones:</label>
-                                                            <div class="col-md-8" id="TipoSanciones">
+                                                            <label class="col-md-3" id="lblSanciones">31. Más: Sanciones:</label>
+                                                            <div class="col-md-9" id="TipoSanciones">
                                                                 <input type="radio" name="rbTipoSancion" value="Ext" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Ext')" /> Extemporaneidad
                                                                 <input type="radio" name="rbTipoSancion" value="Cor" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Cor')" /> Correción
                                                                 <input type="radio" name="rbTipoSancion" value="Ine" ng-model="DetalleDeclaracion.TipoSancion" ng-checked="(DetalleDeclaracion.TipoSancion == 'Ine')" /> Inexactitud
@@ -1069,7 +1071,7 @@
                                     <div class="jumbotron row">
                                         <h2><strong>IMPORTANTE</strong></h2>
                                         <h5 style="text-align:justify">
-                                           Señor usuario, si va a realizar el pago en línea de su Impuesto, también deberá descargar y firmar la Declaración y enviarla junto con el comprobante de pago y el soporte de retenciones a los correos electrónicos: <b>tesoreria@salento-quindio.gov.co </b>, <b> rentas@salento-quindio.gov.co</b>, de no realizarse este trámite su declaración se tendrá por no presentada. También puede realizar el pago en cualquier sucursal COOPCENTRAL.
+                                           Señor usuario, si va a realizar el pago en línea de su Impuesto, también deberá descargar y firmar la Declaración y enviarla junto con el comprobante de pago y el soporte de retenciones a los correos electrónicos: <b>tesoreria@salento-quindio.gov.co </b>, <b> rentas@salento-quindio.gov.co</b>, de no realizarse este trámite su declaración se tendrá por no presentada. También puede realizar el pago en cualquier sucursal COOPCENTRAL
                                         </h5>
                                     </div>
                                     <div class="row">
@@ -1148,13 +1150,9 @@
     <script src="https://autoliquidables.1cero1.com/cdn/scripts/iziToast.js"></script>
     <script src="https://autoliquidables.1cero1.com/cdn/scripts/pdfobject.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>-->
     <!-- Load app main script-->
-   <script src="https://autoliquidables.1cero1.com/service/services.js"></script>
+    <script src="https://autoliquidables.1cero1.com/service/services.js"></script>
     <script src="https://autoliquidables.1cero1.com/controllers/8900011270-Salento/ICA/icaControllerMobile.js"></script>
-    
-    <!-- <script src="services.js"></script> -->
-    <!-- <script src="icaControllerMobile.js"></script>  -->
 
     <script>
         app.constant('icaSettings', {

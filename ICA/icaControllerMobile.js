@@ -32,7 +32,7 @@ blurCurrency.$inject = ['$filter'];
 
 app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window', function ($scope, icaService, icaSettings, $window) {
     $scope.Parametrizacion = {
-        PorcAvisosTableros: 15 / 100,//del 20
+        PorcAvisosTableros: 15 / 100, // Del 15%
         PorcSobretasa: 0,
         FechaMaxima: new Date(),
         UVT: 35607
@@ -246,13 +246,16 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
     });
 
     $scope.$watch('Persona.Contribuyente.Id_TipoDocumento', function () {
-        let dv = document.getElementById("txtDV");
-        let razon = document.getElementById("txtRazon");
-        let nombre = document.getElementById("txtPrimerNombre");
-        let apellido = document.getElementById("txtPrimerApellido");
-        if ($scope.Persona.Contribuyente.Id_TipoDocumento == "2") {
-            document.getElementById("dvJuridica").hidden = false;
-            document.getElementById("dvNatural").hidden = true;
+        const dv = document.getElementById("txtDV");
+        const razon = document.getElementById("txtRazon");
+        const nombre = document.getElementById("txtPrimerNombre");
+        const apellido = document.getElementById("txtPrimerApellido");
+        const dvJuridica = document.getElementById("dvJuridica");
+        const dvNatural = document.getElementById("dvNatural");
+
+        if ($scope.Persona.Contribuyente.Id_TipoDocumento === "2") {
+            dvJuridica.hidden = false;
+            dvNatural.hidden = true;
             dv.classList.add("req");
             dv.removeAttribute("disabled");
             razon.classList.add("req");
@@ -262,10 +265,9 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             document.getElementById("txtSegundoNombre").value = "";
             document.getElementById("txtSegundoApellido").value = "";
             apellido.value = "";
-        }
-        else {
-            document.getElementById("dvJuridica").hidden = true;
-            document.getElementById("dvNatural").hidden = false;
+        } else {
+            dvJuridica.hidden = true;
+            dvNatural.hidden = false;
             dv.classList.remove("req");
             razon.classList.remove("req");
             nombre.classList.add("req");
@@ -381,15 +383,6 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             });
     }
 
-    $scope.flaseDeclarar = function(){
-        $('#overlay').fadeIn();
-        document.getElementById("pago").hidden = false;
-        document.getElementById("guardar").hidden = true;
-        document.getElementById("declarar").hidden = true;
-        $('#overlay').fadeOut();
-        $('#modalFormulario').modal('hide');
-    }
-
     $scope.Declarar = function () {
         let declaracion = {
             Id: $scope.IdDeclaracion,
@@ -493,10 +486,9 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             function (result) {
                 var url = (result.data.replace('"', '')).replace('"', '');
                 window.open(url, '_blank');
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload();
                 }, 3000);
-                location.reload();
             }, function (error) {
                 $('#overlay').fadeOut();
                 iziToast.error({
@@ -509,13 +501,16 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
     /*Calculos*/
     $scope.CalcularRenglon10 = function () {
         $scope.Redondear();
+
         $scope.DetalleDeclaracion.TotalIngresosOrdinarios =
             ($scope.DetalleDeclaracion.IngresosOrdinarios != "" ? parseFloat($scope.DetalleDeclaracion.IngresosOrdinarios) : 0)
             - ($scope.DetalleDeclaracion.IngresosFueraMunicipio != "" ? parseFloat($scope.DetalleDeclaracion.IngresosFueraMunicipio) : 0);
-        if ($scope.DetalleDeclaracion.TotalIngresosOrdinarios < 0) {
-            $scope.DetalleDeclaracion.TotalIngresosOrdinarios = 0;
-        }
-        document.getElementById("txtTotalIngresosOrdinarios").value = icaService.formatNum($scope.DetalleDeclaracion.TotalIngresosOrdinarios);
+
+        $scope.DetalleDeclaracion.TotalIngresosOrdinarios = Math.max($scope.DetalleDeclaracion.TotalIngresosOrdinarios, 0)
+
+        document.getElementById("txtTotalIngresosOrdinarios").value = $scope.DetalleDeclaracion.TotalIngresosOrdinarios == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalIngresosOrdinarios);
+
         $scope.CalcularRenglon16();
     }
 
@@ -530,14 +525,19 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             - ($scope.DetalleDeclaracion.ActivosFijos != "" ? parseFloat($scope.DetalleDeclaracion.ActivosFijos) : 0)
             - ($scope.DetalleDeclaracion.ActividadesExcluidas != "" ? parseFloat($scope.DetalleDeclaracion.ActividadesExcluidas) : 0)
             - ($scope.DetalleDeclaracion.ActividadesExentas != "" ? parseFloat($scope.DetalleDeclaracion.ActividadesExentas) : 0);
-        if ($scope.DetalleDeclaracion.IngresosGravables < 0) {
-            $scope.DetalleDeclaracion.IngresosGravables = 0;
-        }
-        document.getElementById("txtIngresosGravables").value = icaService.formatNum($scope.DetalleDeclaracion.IngresosGravables);
 
-        document.getElementById("txtIngresoAct-1").value = document.getElementById("txtIngresosGravables").value;
-        document.getElementById("txtTotalIngreso").value = document.getElementById("txtIngresosGravables").value;
-        if(Act != 0){
+        $scope.DetalleDeclaracion.IngresosGravables = Math.max($scope.DetalleDeclaracion.IngresosGravables, 0);
+
+        document.getElementById("txtIngresosGravables").value = $scope.DetalleDeclaracion.IngresosGravables == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.IngresosGravables);
+
+        document.getElementById("txtIngresoAct-1").value = $scope.DetalleDeclaracion.IngresosGravables == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.IngresosGravables);
+
+        document.getElementById("txtTotalIngreso").value = $scope.DetalleDeclaracion.IngresosGravables == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.IngresosGravables);
+
+        if (Act != 0) {
             $scope.recalcularAct();
         }
     }
@@ -565,57 +565,44 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
 
     $scope.CalcularRenglon20 = function () {
         $scope.Redondear();
-        $scope.DetalleDeclaracion.ImpIndYComercio = ($scope.DetalleDeclaracion.TotalImpuesto != "" ? parseFloat($scope.DetalleDeclaracion.TotalImpuesto) : 0)
+
+        $scope.DetalleDeclaracion.ImpIndYComercio =
+            ($scope.DetalleDeclaracion.TotalImpuesto != "" ? parseFloat($scope.DetalleDeclaracion.TotalImpuesto) : 0)
             + ($scope.DetalleDeclaracion.ImpuestoLey != "" ? parseFloat($scope.DetalleDeclaracion.ImpuestoLey) : 0);
-        $scope.ImpuestoMinimo();
-        /*if($scope.DetalleDeclaracion.ImpIndYComercio<=0){
-        }*/
-        document.getElementById("txtImpIndYComercio").value = icaService.formatNum($scope.DetalleDeclaracion.ImpIndYComercio);
+
+        $scope.DetalleDeclaracion.ImpIndYComercio = Math.max($scope.DetalleDeclaracion.ImpIndYComercio, 0);
+
+        document.getElementById("txtImpIndYComercio").value = $scope.DetalleDeclaracion.ImpIndYComercio == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.ImpIndYComercio);
+
         $scope.CalcularRenglon25();
     }
 
     $scope.CalcularAvisos = function () {
+        $scope.DetalleDeclaracion.ImpAvisosyTableros = 0;
         if ($scope.TieneAvisos == "Si") {
-            if (icaSettings.CodigoMunicipio == '8909853168')
-                $scope.DetalleDeclaracion.ImpAvisosyTableros = $scope.DetalleDeclaracion.ImpIndYComercio * 0.15;
-            else
-                $scope.DetalleDeclaracion.ImpAvisosyTableros = $scope.DetalleDeclaracion.ImpIndYComercio * $scope.Parametrizacion.PorcAvisosTableros;
-        } else {
-            $scope.DetalleDeclaracion.ImpAvisosyTableros = 0;
+            if (icaSettings.CodigoMunicipio == '8900011270') {
+                $scope.DetalleDeclaracion.ImpAvisosyTableros = icaService.round($scope.DetalleDeclaracion.ImpIndYComercio * $scope.Parametrizacion.PorcAvisosTableros);
+            }
         }
-        document.getElementById("txtImpAvisosyTableros").value = $scope.DetalleDeclaracion.ImpAvisosyTableros;
-        $scope.redondeo($("#txtImpAvisosyTableros"))
-        document.getElementById("txtImpAvisosyTableros").value = icaService.formatNum(document.getElementById("txtImpAvisosyTableros").value);
+
+        document.getElementById("txtImpAvisosyTableros").value = $scope.DetalleDeclaracion.ImpAvisosyTableros == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.ImpAvisosyTableros);
     }
 
     $scope.CalcularSobretasaBomberil = function () {
-        if (document.getElementById("txtSobretasa").readOnly == true) {
-            $scope.DetalleDeclaracion.Sobretasa = $scope.DetalleDeclaracion.ImpIndYComercio * 0.05;
-            $("#txtSobretasa").val($scope.DetalleDeclaracion.Sobretasa);
-            $scope.redondeo($("#txtSobretasa"));
+        const txtSobreT = document.getElementById("txtSobretasa");
+        if (txtSobreT.readOnly) {
+            $scope.DetalleDeclaracion.Sobretasa = icaService.round($scope.DetalleDeclaracion.ImpIndYComercio * 0.05);
+            txtSobreT.value = $scope.DetalleDeclaracion.Sobretasa == 0 ?
+                '0.00' : icaService.formatNum($scope.DetalleDeclaracion.Sobretasa);
         }
-    }
-
-    $scope.CalculaUnidadesComerciales = function () {
-
-        //quitar
-        $scope.DetalleDeclaracion.UnidadesComerciales =
-            ($scope.DetalleDeclaracion.UnidadesComerciales != "" ? parseFloat($scope.DetalleDeclaracion.UnidadesComerciales) : 0);
-        //($scope.DetalleDeclaracion.Sobretasa != "" ? parseFloat($scope.DetalleDeclaracion.Sobretasa * 0.2 ) : 0)
-
-        document.getElementById("txtUnidadesComerciales").value = icaService.formatNum($scope.DetalleDeclaracion.UnidadesComerciales);
-        //$scope.redondeo($("#txtUnidadesComerciales"));
-        //document.getElementById("txtUnidadesComerciales").value = icaService.formatNum(document.getElementById("txtUnidadesComerciales").value);
-
-        // document.getElementById("txtUnidadesComerciales").value =  $scope.DetalleDeclaracion.UnidadesComerciales;
-        // document.getElementById("txtUnidadesComerciales").value = icaService.formatNum(document.getElementById("txtUnidadesComerciales").value);
     }
 
     $scope.CalcularRenglon25 = function () {
         $scope.Redondear();
         $scope.CalcularAvisos();
         $scope.CalcularSobretasaBomberil();
-        $scope.CalculaUnidadesComerciales();
 
         $scope.DetalleDeclaracion.TotalImpuestoCargo =
             ($scope.DetalleDeclaracion.ImpIndYComercio != "" ? parseFloat($scope.DetalleDeclaracion.ImpIndYComercio) : 0)
@@ -623,75 +610,119 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             + ($scope.DetalleDeclaracion.UnidadesComerciales != "" ? parseFloat($scope.DetalleDeclaracion.UnidadesComerciales) : 0)
             + ($scope.DetalleDeclaracion.Sobretasa != "" ? parseFloat($scope.DetalleDeclaracion.Sobretasa) : 0)
             + ($scope.DetalleDeclaracion.SobretasaSeguridad != "" ? parseFloat($scope.DetalleDeclaracion.SobretasaSeguridad) : 0);
-        if ($scope.DetalleDeclaracion.TotalImpuestoCargo < 0) {
-            $scope.DetalleDeclaracion.TotalImpuestoCargo = 0;
-        }
 
-        //$("#txtTotalImpuestosCargo").val(icaService.formatNum($scope.DetalleDeclaracion.TotalImpuestoCargo));
-        document.getElementById("txtTotalImpuestosCargo").value = icaService.formatNum($scope.DetalleDeclaracion.TotalImpuestoCargo);
+        $scope.DetalleDeclaracion.TotalImpuestoCargo = Math.max($scope.DetalleDeclaracion.TotalImpuestoCargo, 0)
+
+        document.getElementById("txtTotalImpuestosCargo").value = $scope.DetalleDeclaracion.TotalImpuestoCargo == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalImpuestoCargo);
+
         $scope.CalcularRenglon33();
     }
 
     $scope.CalcularSancion = function () {
+        $scope.SetFechaMaxima();
+
         const now = new Date();
-        // const ValUVT = 471000; // Valor actual de 10UVT se usa siempre del año en el que esta declarando el contribuyente
-        const ValUVT = 235000; // Valor actual de 5UVT se usa siempre del año en el que esta declarando el contribuyente
+        const ValUVT = 235000; // Valor actual de 5UVT Año acutal
         const DMax = $scope.DetalleDeclaracion.fechaMaxima;
         const txtSanciones = document.getElementById("txtSanciones");
         const txtInteresMora = document.getElementById("txtInteresMora");
+        const txtOtraSancion = document.getElementById("txtOtraSancion");
+        const TipoSanciones = document.getElementById("TipoSanciones");
 
         txtSanciones.readOnly = false;
         txtInteresMora.classList.remove("req");
 
-        if (now > DMax) {
-            const OtraSan = document.getElementById("txtOtraSancion");
-            var radios = document.getElementsByName('rbTipoSancion');
-
+        if (now > DMax && $scope.Id_TipoUso == 1) {
             const a = Math.max(1, icaService.dateDiff(now, DMax));
-            const sancionInicial = 0.05 * a * $scope.DetalleDeclaracion.TotalImpuestosCargo;
-            const sancionFinal = Math.min(Math.max(ValUVT, sancionInicial), $scope.DetalleDeclaracion.TotalImpuestosCargo);
+            const sancionInicial = 0.05 * a * $scope.DetalleDeclaracion.TotalImpuestoCargo;
+            let sancionFinal = Math.min(Math.max(ValUVT, sancionInicial), $scope.DetalleDeclaracion.TotalImpuestoCargo);
+            sancionFinal = Math.max(sancionFinal, ValUVT);
             $scope.DetalleDeclaracion.Sanciones = icaService.round(sancionFinal);
 
-            for(var i = 0; i < radios.length; i++) {
-                if(radios[i].value === 'Ext') {
-                    radios[i].checked = true;
-                    break;
-                }
-            }
-            OtraSan.style.display = "none";
+            document.getElementById("txtOtraSancion").hidden = true;
+            document.getElementById("txtOtraSancion").value = "";
+            $("input[name='rbTipoSancion']").prop('disabled', true);
+            $scope.DetalleDeclaracion.TipoSancion = "Ext";
+            $scope.DetalleDeclaracion.OtraSancion = "";
 
+            txtOtraSancion.style.display = 'none';
             txtSanciones.readOnly = true;
             txtInteresMora.classList.add("req");
-            txtSanciones.value = icaService.formatNum($scope.DetalleDeclaracion.Sanciones);
+
+            $scope.CalcularInteresesMoratorios();
+            txtSanciones.value = $scope.DetalleDeclaracion.Sanciones == 0 ?
+                '0.00' : icaService.formatNum($scope.DetalleDeclaracion.Sanciones);
         } else {
-            $scope.DetalleDeclaracion.Sanciones = 0;
-            txtSanciones.value = icaService.formatNum($scope.DetalleDeclaracion.Sanciones);
+            TipoSanciones.hidden = $scope.Id_TipoUso == 3;
+            $("#txtSanciones").prop("readonly", $scope.Id_TipoUso == 3);
+            $("#txtSanciones").prop("disabled", $scope.Id_TipoUso == 3);
+            $("input[name='rbTipoSancion']").prop('disabled', $scope.Id_TipoUso == 3);
         }
     }
 
+    $scope.CalcularInteresesMoratorios = () => {
+        $scope.SetFechaMaxima();
+        if ($scope.DetalleDeclaracion.TipoSancion == "Ext") {
+            const Now = new Date();
+            const ValorPag = $scope.DetalleDeclaracion.ValorPagar;
+            const FechaM = $scope.DetalleDeclaracion.fechaMaxima;
+            const TasaIntMoraAnual = 31.09;
+            const TasaIntMoraDiario = TasaIntMoraAnual / 366;
+            let diferenciaFechas = Now - FechaM;
+            diferenciaFechas = Math.floor(diferenciaFechas / (1000 * 60 * 60 * 24));
+            let Valor = icaService.round(ValorPag * TasaIntMoraDiario * diferenciaFechas);
+            Valor = Math.max(Valor, 0);
+
+            if (event) {
+                reaplicar($(event.target));
+            }
+
+            function reaplicar(elem) {
+                const Intereses = parseInt($scope.DetalleDeclaracion.InteresMora);
+                if (elem[0].tagName === "INPUT" && elem[0].id === 'txtInteresMora') {
+                    if (Intereses > Valor) {
+                        elem[0].value = Intereses;
+                    } else {
+                        elem[0].value = Valor;
+                        $scope.DetalleDeclaracion.InteresMora = Valor.toString();
+                        iziToast.error({
+                            title: 'Valor Errado',
+                            message: 'El valor de la sancion no puede ser menor a 5UVT',
+                        })
+                    }
+                } else {
+                    $scope.DetalleDeclaracion.InteresMora = Valor;
+                    document.getElementById("txtInteresMora").value = $scope.DetalleDeclaracion.InteresMora == 0 ?
+                        "0.00" : icaService.formatNum($scope.DetalleDeclaracion.InteresMora);
+                }
+            }
+        }
+    }
 
     $scope.CalcularAnticipo = function () {
-        $scope.redondeoValor();
-        if ($scope.TieneAnticipo === "Si") {
-            const now = new Date();
-            const anioSelected = parseInt(document.getElementById("ddlAnio").value);
-            const porcentaje = anioSelected <= 2019 ? 0.40 : 0.08;
+        let porcentaje = 0.00;
+        const ddlAnio = parseInt(document.getElementById("ddlAnio").value);
+        $scope.DetalleDeclaracion.AnticipoImpuesto = 0;
 
-            if(now < $scope.Declaracion.FechaPresentacion){
-                let impIndYComercio = parseFloat($scope.DetalleDeclaracion.ImpIndYComercio) || 0;
-                $scope.DetalleDeclaracion.AnticipoImpuesto = icaService.round(impIndYComercio * porcentaje);
-            }
-        } else {
-            $scope.DetalleDeclaracion.AnticipoImpuesto = 0;
+        if ($scope.TieneAnticipo == "Si") {
+            porcentaje = (ddlAnio <= 2019) ? 0.40 : 0.15;
+
+            const impIndYComercio = parseFloat($scope.DetalleDeclaracion.ImpIndYComercio) || 0;
+            const impAvisosyTableros = parseFloat($scope.DetalleDeclaracion.ImpAvisosyTableros) || 0;
+
+            $scope.DetalleDeclaracion.AnticipoImpuesto = icaService.round((impIndYComercio + impAvisosyTableros) * porcentaje);
         }
 
-        document.getElementById("txtAnticipoImpuesto").value = icaService.formatNum($scope.DetalleDeclaracion.AnticipoImpuesto);
+        document.getElementById("txtAnticipoImpuesto").value = $scope.DetalleDeclaracion.AnticipoImpuesto == 0
+            ? '0.00' : icaService.formatNum($scope.DetalleDeclaracion.AnticipoImpuesto);
     }
 
     $scope.CalcularRenglon33 = function () {
+        $scope.Redondear();
         $scope.CalcularSancion();
         $scope.CalcularAnticipo();
-        $scope.Redondear();
+
         var valor =
             ($scope.DetalleDeclaracion.TotalImpuestoCargo != "" ? parseFloat($scope.DetalleDeclaracion.TotalImpuestoCargo) : 0)
             - ($scope.DetalleDeclaracion.ValorExencion != "" ? parseFloat($scope.DetalleDeclaracion.ValorExencion) : 0)
@@ -700,70 +731,84 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             - ($scope.DetalleDeclaracion.AnticipoLiquidado != "" ? parseFloat($scope.DetalleDeclaracion.AnticipoLiquidado) : 0)
             + ($scope.DetalleDeclaracion.AnticipoImpuesto != "" ? parseFloat($scope.DetalleDeclaracion.AnticipoImpuesto) : 0)
             + ($scope.DetalleDeclaracion.Sanciones != "" ? parseFloat($scope.DetalleDeclaracion.Sanciones) : 0)
-            - ($scope.DetalleDeclaracion.SaldoPeriodo != "" ? parseFloat($scope.DetalleDeclaracion.SaldoPeriodo) : 0)
-            - ($scope.DetalleDeclaracion.ValorPagadoDeclaracionInicial != "" ? parseFloat($scope.DetalleDeclaracion.ValorPagadoDeclaracionInicial) : 0);
+            - ($scope.DetalleDeclaracion.SaldoPeriodo != "" ? parseFloat($scope.DetalleDeclaracion.SaldoPeriodo) : 0);
+
         if (valor >= 0) {
             $scope.DetalleDeclaracion.TotalSaldoCargo = valor;
             $scope.DetalleDeclaracion.TotalSaldoFavor = 0;
             $scope.DetalleDeclaracion.ValorPagar = valor;
-        }
-        else {
-            $scope.DetalleDeclaracion.TotalSaldoFavor = valor > 0 ? valor : valor * (-1);
+        } else {
+            $scope.DetalleDeclaracion.TotalSaldoFavor = Math.abs(valor);
             $scope.DetalleDeclaracion.TotalSaldoCargo = 0;
             $scope.DetalleDeclaracion.ValorPagar = 0;
         }
-        document.getElementById("txtTotalSaldoCargo").value = icaService.formatNum($scope.DetalleDeclaracion.TotalSaldoCargo);
-        document.getElementById("txtTotalSaldoFavor").value = icaService.formatNum($scope.DetalleDeclaracion.TotalSaldoFavor);
+
         $scope.DetalleDeclaracion.ValorPagar = $scope.DetalleDeclaracion.TotalSaldoCargo;
-        document.getElementById("txtValorPagar").value = icaService.formatNum($scope.DetalleDeclaracion.ValorPagar);
+
+        document.getElementById("txtTotalSaldoCargo").value = $scope.DetalleDeclaracion.TotalSaldoCargo == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalSaldoCargo);
+
+        document.getElementById("txtTotalSaldoFavor").value = $scope.DetalleDeclaracion.TotalSaldoFavor == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalSaldoFavor);
+
+        document.getElementById("txtValorPagar").value = $scope.DetalleDeclaracion.ValorPagar == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.ValorPagar);
+
         $scope.CalcularRenglon38();
     }
 
     $scope.CalcularDescuento = function () {
-        if (document.getElementById("txtDescuento").readOnly == true) {
-            let ValDllAnio = parseInt(document.getElementById("ddlAnio").value);
-            let valorImpuesto = ($scope.DetalleDeclaracion.ImpIndYComercio != "" ? parseFloat($scope.DetalleDeclaracion.ImpIndYComercio) : 0);
+        $scope.DetalleDeclaracion.Descuento = 0;
+        const txtDescuento = document.getElementById("txtDescuento");
+
+        if (txtDescuento.readOnly) {
+            const ValDllAnio = parseInt(document.getElementById("ddlAnio").value);
+            const valorImpuesto = ($scope.DetalleDeclaracion.ImpIndYComercio != "" ? parseFloat($scope.DetalleDeclaracion.ImpIndYComercio) : 0);
             let now = new Date();
-            if (ValDllAnio == parseInt(now.getFullYear() - 1) && $scope.DetalleDeclaracion.TotalSaldoFavor <= 0) {
+
+            if (ValDllAnio == parseInt(now.getFullYear() - 1) && $scope.DetalleDeclaracion.TotalSaldoFavor == 0) {
                 if (now <= new Date(`${ValDllAnio + 1}/02/29`)) {
                     $scope.DetalleDeclaracion.Descuento = valorImpuesto * 0.15;
                 } else if (now <= new Date(`${ValDllAnio + 1}/03/27`)) {
                     $scope.DetalleDeclaracion.Descuento = valorImpuesto * 0.1;
-                } else if (now >= new Date(`${ValDllAnio + 1}/04/01`) && now <= new Date(`${ValDllAnio + 1}/04/31`)) {
-                    $scope.DetalleDeclaracion.Descuento = 0;
                 }
-            } else {
-                $scope.DetalleDeclaracion.Descuento = 0;
             }
-            document.getElementById("txtDescuento").value = $scope.DetalleDeclaracion.Descuento;
-            $scope.redondeo($("#txtDescuento"));
-            document.getElementById("txtDescuento").value = icaService.formatNum(document.getElementById("txtDescuento").value);
+
+            txtDescuento.value = $scope.DetalleDeclaracion.Descuento == 0 ?
+                '0.00' : icaService.formatNum($scope.DetalleDeclaracion.Descuento);
         }
     }
 
     $scope.CalcularRenglon38 = function () {
         $scope.Redondear();
         $scope.CalcularDescuento();
+        $scope.CalcularInteresesMoratorios();
+
         $scope.DetalleDeclaracion.TotalAPagar =
             ($scope.DetalleDeclaracion.ValorPagar != "" ? parseFloat($scope.DetalleDeclaracion.ValorPagar) : 0)
             - ($scope.DetalleDeclaracion.Descuento != "" ? parseFloat($scope.DetalleDeclaracion.Descuento) : 0)
             + ($scope.DetalleDeclaracion.InteresMora != "" ? parseFloat($scope.DetalleDeclaracion.InteresMora) : 0);
-        if ($scope.DetalleDeclaracion.TotalAPagar < 0) {
-            $scope.DetalleDeclaracion.TotalAPagar = 0;
-        }
 
-        document.getElementById("txtTotalAPagar").value = $scope.DetalleDeclaracion.TotalAPagar > 0 ? $scope.DetalleDeclaracion.TotalAPagar : "0";
-        document.getElementById("txtTotalAPagar").value = icaService.formatNum(document.getElementById("txtTotalAPagar").value);
+        $scope.DetalleDeclaracion.TotalAPagar = Math.max($scope.DetalleDeclaracion.TotalAPagar, 0)
+
+        document.getElementById("txtTotalAPagar").value = $scope.DetalleDeclaracion.TotalAPagar == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalAPagar);
+
+        document.getElementById("txtTotalAPagar").value = $scope.DetalleDeclaracion.TotalAPagar == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalAPagar);
 
         $scope.CalcularRenglon40();
     }
 
     $scope.CalcularRenglon40 = function () {
         $scope.Redondear();
+
         $scope.DetalleDeclaracion.TotalPagoVoluntario =
             ($scope.DetalleDeclaracion.TotalAPagar != "" ? parseFloat($scope.DetalleDeclaracion.TotalAPagar) : 0)
             + ($scope.DetalleDeclaracion.PagoVoluntario != "" ? parseFloat($scope.DetalleDeclaracion.PagoVoluntario) : 0);
-        document.getElementById("txtTotalPagoVoluntario").value = $scope.DetalleDeclaracion.TotalPagoVoluntario;
+
+        document.getElementById("txtTotalPagoVoluntario").value = $scope.DetalleDeclaracion.TotalPagoVoluntario == 0 ?
+            '0.00' : icaService.formatNum($scope.DetalleDeclaracion.TotalPagoVoluntario);
     }
 
     /*Funciones actividades*/
@@ -816,8 +861,8 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
                 + '</div>'
                 + '<div class="col-md-4">'
                 + '    <div class="col-md-3">'
-                + '        <div class="form-group">'
-                + '            <label><strong>CÓDIGO</strong></label>'
+                + '        <div class="form-group" style="text-align: center"">'
+                + '            <label><strong>CÓDIGO CIIU</strong></label>'
                 + '        </div>'
                 + '    </div>'
                 + '    <div class="col-md-9">'
@@ -901,10 +946,8 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
     $scope.delRow = function (elem) {
         var current = document.getElementById(elem);
         var parent = current.parentElement.parentElement.parentElement.parentElement;
-        //if (parent.tagName == "TR") {
         parent.parentElement.removeChild(parent);
         $scope.recalcularAct();
-        //}
     }
 
     $scope.recalcularAct = function () {
@@ -912,106 +955,120 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
         var elems = document.getElementsByClassName("act");
         var total = 0;
         var totalIngreso = 0;
+
         $.each(elems, function (key, val) {
             var i = val.id.split("-")[1];
-            totalIngreso += this.value != "" ? (parseFloat(this.value.replace(/,/gi, '').replace('.00', ''))) : 0;//icaService.formatNum(
+            totalIngreso += this.value != "" ? DeformatNumber(this.value) : 0;
             var impuestoActividad = document.getElementById("txtImpuestoAct-" + i);
             var tarifa = document.getElementById("txtTarifaAct-" + i).value;
-            impuestoActividad.value = this.value != "" ? (Math.round(((parseFloat(this.value.replace(/,/gi, '').replace('.00', '')) * tarifa / 1000)) / 1000) * 1000) : 0;
+            impuestoActividad.value = this.value !== "" ? icaService.round(DeformatNumber(this.value) / 1000 * tarifa) : 0;
             impuestoActividad.value = icaService.formatNum(impuestoActividad.value);
-            total = total + parseInt(impuestoActividad.value.replace(/,/gi, '').replace('.00', ''));
+            total = total + DeformatNumber(impuestoActividad.value);
             var totalImpuesto = $("input[id*='txtTotalImpuesto']")[0];
             $scope.DetalleDeclaracion.TotalImpuesto = total;
-            if($scope.DetalleDeclaracion.TotalImpuesto < minTotalImpuesto){
-                $scope.DetalleDeclaracion.TotalImpuesto = minTotalImpuesto;
-                iziToast.error({
-                    title: 'Señor contribuyente',
-                    message: 'El valor del punto 17 de su declaracion es menor a 520,000 el valor de esta pasara a ser 40% DEL S.M.L.M.V.',
-                });
-            }
             totalImpuesto.value = icaService.formatNum($scope.DetalleDeclaracion.TotalImpuesto);
             $scope.CalcularRenglon20();
         });
+
+        if ($scope.DetalleDeclaracion.TotalImpuesto < minTotalImpuesto) {
+            $scope.DetalleDeclaracion.TotalImpuesto = minTotalImpuesto;
+            var totalImpuesto = $("input[id*='txtTotalImpuesto']")[0];
+            totalImpuesto.value = icaService.formatNum($scope.DetalleDeclaracion.TotalImpuesto);
+            iziToast.error({
+                title: 'Señor contribuyente',
+                message: 'El valor del punto 17 de su declaracion es menor a 520,000 el valor de esta pasara a ser 40% DEL S.M.L.M.V.',
+            });
+            $scope.CalcularRenglon20();
+        }
+
         $scope.DetalleDeclaracion.TotalIngreso = totalIngreso;
         var txtTotalIngresos = $("#txtTotalIngreso")[0];
         txtTotalIngresos.value = icaService.formatNum($scope.DetalleDeclaracion.TotalIngreso);
+
+        function DeformatNumber(value) {
+            return parseFloat(value.replace(/,/gi, '').replace('.00', ''));
+        }
     }
 
     $scope.chargeddl = function (elem) {
         var registros = [];
         $.each($scope.Actividades, function (key, val) {
-            registros.push("<option value='" + val.Id + "'>" + val.Codigo + " - " + val.Descripcion + "</option>");
+            registros.push("<option value='" + val.Id + "'>" + "CIIU " + val.Codigo + " - " + val.Descripcion + "</option>");
         });
         elem.append(registros.join(''));
         elem.select2();
-        /*var d=document.documentElement.clientWidth;
-
-        if(d>600){
-            elem.select2();
-        }else{
-            elem.select2();
-        }*/
     }
 
     $scope.lockFields = function () {
+        const txtDescuento = document.getElementById("txtDescuento");
+        const txtSobretasa = document.getElementById("txtSobretasa");
+        const txtSobretasaSeguridad = document.getElementById("txtSobretasaSeguridad");
+        const txtAutorretenciones = document.getElementById("txtAutorretenciones");
+        const txtAnticipoLiquidado = document.getElementById("txtAnticipoLiquidado");
+        const txtAnticipoImpuesto = document.getElementById("txtAnticipoImpuesto");
+        const txtValorPagar = document.getElementById("txtValorPagar");
+        const txtTotalAPagar = document.getElementById("txtTotalAPagar");
+        const txtSanciones = document.getElementById("txtSanciones");
+        const txtSaldoPeriodo = document.getElementById("txtSaldoPeriodo");
+
         switch (icaSettings.CodigoMunicipio) {
             case '8906804370':
-                document.getElementById("txtDescuento").readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8913800381':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtAutorretenciones").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtValorPagar").readOnly = false;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtAutorretenciones.readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtValorPagar.readOnly = false;
                 break;
             case '890984043':
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 break;
             case '8999994152':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '800073475':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 break;
             case '8906800971':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtDescuento.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 break;
             case '891180021':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtAutorretenciones").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
-                document.getElementById("txtTotalAPagar").readOnly = false;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtAutorretenciones.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtDescuento.readOnly = true;
+                txtTotalAPagar.readOnly = false;
                 break;
             case '8906800591':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtSanciones").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtSanciones.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8001005335':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8906800267':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
                 break;
             case '8906803784':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8918004750':
                 let usoElems = document.getElementsByName("uso");
@@ -1020,117 +1077,114 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
                         val.parentElement.hidden = true;
                     }
                 });
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtAutorretenciones").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtAutorretenciones.readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '890980577':
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtSaldoPeriodo").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtSaldoPeriodo.readOnly = true;
                 break;
             case '8999993842': //Simijaca
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8000959612': //Bolivar-cauca
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 document.getElementById("txtValorExencion").readOnly = true;
-                document.getElementById("txtAutorretenciones").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtSaldoPeriodo").readOnly = true;
-                document.getElementById("txtSanciones").readOnly = true;
+                txtAutorretenciones.readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtSaldoPeriodo.readOnly = true;
+                txtSanciones.readOnly = true;
                 document.getElementById("txtInteresMora").readOnly = true;
                 break;
             case '892099548': //San martin llanos
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 document.getElementById("txtValorExencion").readOnly = true;
-                document.getElementById("txtAutorretenciones").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
-                document.getElementById("txtSanciones").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtAutorretenciones.readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
+                txtSanciones.readOnly = true;
+                txtDescuento.readOnly = true;
                 document.getElementById("txtInteresMora").readOnly = true;
                 break;
             case '899999312': //Villeta
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 document.getElementById("txtValorExencion").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
                 break;
             case '890205383': //Piedecuesta
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtAnticipoLiquidado").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtAnticipoLiquidado.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
                 break;
             case '8000996623': //Moniquirá
                 document.getElementById("txtUnidadesComerciales").readOnly = true;
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 document.getElementById("txtValorExencion").readOnly = true;
                 break;
             case '800103659': //Paz de ariporo
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 break;
             case '819003297': //Zona Bananera
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '891200461': //Pto Asis
-                document.getElementById("txtSobretasa").readOnly = true;
+                txtSobretasa.readOnly = true;
                 break;
             // SITIOS LITE
             case '8915008416': //Miranda LITE
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8915023976': //Mercaderes LITE
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '8000249776': //Taminango LITE
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
                 break;
             case '800096766': //Taminango LITE
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
                 break;
             case '8909853168': //Carepa
-                document.getElementById("txtSobretasa").readOnly = true;
-                document.getElementById("txtSobretasaSeguridad").readOnly = true;
-                document.getElementById("txtDescuento").readOnly = true;
-                document.getElementById("txtAnticipoImpuesto").readOnly = true;
+                txtSobretasa.readOnly = true;
+                txtSobretasaSeguridad.readOnly = true;
+                txtDescuento.readOnly = true;
+                txtAnticipoImpuesto.readOnly = true;
                 break;
             case '800102891': //Mocoa
-                document.getElementById("txtSobretasa").readOnly = true;
+                txtSobretasa.readOnly = true;
                 break;
             default:
+                txtDescuento.readOnly = true;
                 break;
         }
     }
 
     /*ready*/
     angular.element(document).ready(function () {
-        /*let movil=navigator.userAgent.indexOf("Version/");
-        if(movil<0){
-            alert("Si     "+navigator.userAgent);
-        }*/
         icaService.resize();
         $(window).resize(function () {
             icaService.resize();
@@ -1158,9 +1212,13 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
             return icaService.letterWith(this);
         });
         $("#btnSave").click(function () {
-            $scope.Guardar();
-            if (icaSettings.CodigoMunicipio == '8906800591') {
-                $('#modalMesaje').modal('show');
+            if (document.getElementById("ddlAct-1").value == 0) {
+                iziToast.error({
+                    title: 'Actividad no selecciona',
+                    message: 'Señor contribuyente debe de seleccionar una actividad para presentar una declaracion',
+                });
+            } else {
+                $scope.Guardar();
             }
         });
         $("#btnDownload").click(function () {
@@ -1168,7 +1226,6 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
         });
         $("#btnDeclarar").click(function () {
             $scope.Declarar();
-            // $scope.flaseDeclarar();
         });
         $("#btnCancelar").click(function () {
             document.getElementById("declarar").hidden = true;
@@ -1210,7 +1267,7 @@ app.controller('icaController', ['$scope', 'icaService', 'icaSettings', '$window
         $("#ddlAnio").change(function () {
             if ($scope.DetalleDeclaracion.ImpIndYComercio > 0) {
                 $scope.CalcularRenglon20();
-                //$scope.CalcularSancion()
+                $scope.CalcularSancion();
             }
         });
         $('.select2').select2();
